@@ -1,5 +1,6 @@
-import { getWorks, getCategories } from "./display.js";
+import { getDisplayOfWorks, getDisplayOfCategories } from "./display.js";
 
-const link = "http://localhost:5678/api/"
 
-getCategories();
+getDisplayOfCategories();
+getDisplayOfWorks();
+// getWorkByCategory();

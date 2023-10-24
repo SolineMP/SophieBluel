@@ -226,12 +226,94 @@ input[type="submit"]{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.bad_request {
+	background-color: rgba(255, 0, 0, 0.2);
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+/* Element de modification si l'utilisateur est enregistré */
+.displayNone {
+	display: none;
+}
+
+
+/* Fenêtre modale */
+
+.modal-btn {
+	display: flex;
+	flex-direction: row-reverse;
+	padding: 10px 14px;
+	font-size: 16px;
+	cursor: pointer;
+	border: none;
+	background: none; 
+	font-family: 'Work Sans'
+}
+
+.modal-btn i {
+	margin-right: 7px;
+}
+
+.modal-container {
+	display: none;
+	position: fixed; 
+	top: 0; 
+	width: 100%;
+	height: 100%;	
+}
+
+.active {
+	display: block;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #333333d3;
+}
+
+.modal {
+	width: 95%;
+	max-width: 500px;
+	min-width: 300px;
+	padding: 30px;
+	background: #fff;
+	border-radius : 5px; 
+	position: absolute;
+	top : 40%; 
+	left: 50%; 
+	transform: translate(-50%, -50%);
+}
+
+.close-modal {
+	padding: 8px, 10px;
+	border: none;
+	font-size : 18px; 
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	background: #fff;
+	color: black;
+}
+
+.modal h1 {
+	margin-bottom: 10px
+
+}
+
+.modal figure {
+	display : grid;	
+	grid-template-columns: 70px 70px 70px 70px 70px;
+	grid-column-gap: 9px;
+	grid-row-gap: 30px;
+}
 
 
 

@@ -1,4 +1,5 @@
 import { getCategories, getWorks } from "./api.js";
+import { openModal } from "./modals.js";
 
 // Création du premier bouton filtre
 const premierBtn = document.createElement("button");
@@ -63,6 +64,35 @@ export async function getDisplayOfWorks() {
 //             console.log("test")
 //         })
 //     }
-// }   
+// } 
+
+// Page si l'utilisateur est connecté 
+export function displayIfConnectedUser() {
+    // Deconnexion de l'utilisateur 
+    let btnDeco = document.getElementById("decoBtn");
+    btnDeco.textContent = "logout"
+    btnDeco.addEventListener("click", () => {
+        let deconnexion = window.localStorage.removeItem("token")
+    })
+    // Disparition du bouton "Tous"
+    premierBtn.classList.add("displayNone");
+    // Création d'une div pour le bouton "Modifier"
+    let updateBtn = document.createElement("button");
+    updateBtn.classList.add("modal-btn", "modal-trigger")
+    updateBtn.textContent = "modifier"
+    sectionPortfolio.appendChild(updateBtn);
+    sectionPortfolio.insertBefore(updateBtn, filterDiv)
+    // Ajout de l'icone
+    let iconUpdate = document.createElement("i")
+    iconUpdate.setAttribute("class", "fa-regular fa-pen-to-square")
+    updateBtn.appendChild(iconUpdate)
+
+    // Affichage des éléments 
+    getDisplayOfWorks();
+
+    // Ouverture de la modale 
+    openModal(); 
+}
+
 
 

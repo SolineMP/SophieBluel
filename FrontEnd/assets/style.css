@@ -241,6 +241,20 @@ footer nav ul {
 	display: none;
 }
 
+.blackDiv {
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 50px;
+	color: white;
+}
+
+.blackDiv i {
+	margin-right: 5px;
+}
+
 
 /* Fenêtre modale */
 
@@ -275,13 +289,13 @@ footer nav ul {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: #333333d3;
+	background: #33333340;
 }
 
 .modal {
 	width: 95%;
-	max-width: 500px;
-	min-width: 300px;
+	max-width: 630px;
+	height: 688px;
 	padding: 30px;
 	background: #fff;
 	border-radius : 5px; 
@@ -289,12 +303,13 @@ footer nav ul {
 	top : 40%; 
 	left: 50%; 
 	transform: translate(-50%, -50%);
+	text-align: center;
 }
 
 .close-modal {
 	padding: 8px, 10px;
 	border: none;
-	font-size : 18px; 
+	font-size : 25px; 
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -303,17 +318,143 @@ footer nav ul {
 	color: black;
 }
 
-.modal h1 {
-	margin-bottom: 10px
-
+.modal h3 {
+	margin-bottom: 10px;
+	font-family: 'Work Sans';
+	font-size: 25px;
+	text-align: center;
+	margin-bottom: 50px;
+	margin-top: 25px;
 }
 
-.modal figure {
+.modalFigure {
+	width: 80%;
 	display : grid;	
-	grid-template-columns: 70px 70px 70px 70px 70px;
-	grid-column-gap: 9px;
+	grid-template-columns: 18% 18% 18% 18% 18%;
 	grid-row-gap: 30px;
+	grid-column-gap: 15px;
+	margin-left: 50px;
+	padding-bottom: 70px;
+	border-bottom: 1px solid grey;
 }
 
+.modalWork {
+	position: relative;
+	box-sizing: border-box;
+}
 
+.modalWork #modaleImage {
+	width: 100%;
+}
 
+.modalFigure i {
+	background-color: black;
+	color: white;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border-radius: 5px;
+	display: flex;
+}
+
+.fa-solid {
+	font-size: x-small;
+	padding: 5px;
+	font-weight: 600;
+}
+
+/* Bouton Ajouter de la fenêtre modale */
+
+.addWorkBtn {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+	border-radius: 25px;
+	padding: 12px 50px 12px 50px;
+	border: 1px #1D6154 solid;
+	font-size: 18px;
+	cursor: pointer;
+	margin-top: 40px;
+	
+}
+
+/* Bouton retour en arrière de la fenêtre modale */
+
+.returnGallery {
+	font-size: 20px;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+/* Div "ajouter une photo" de la fenêtre modale */
+
+.divAddImage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	background-color: #E8F1F6;
+	width: 80%;
+	height: 170px;
+	margin-bottom: 56px;
+}
+
+.divAddImage i {
+	color: #B9C5CC;
+	font-size: 76px;
+}
+
+.divAddImage input {
+	text-decoration: none;
+}
+
+.addWorkForm {
+	display: flex; 
+	flex-direction: column;
+	align-items: center;
+}
+
+.formLabel {
+	margin-bottom: 5px;
+	align-self: flex-start;
+	margin-left: 60px;
+}
+
+.addWorkForm input, .addWorkForm select {
+	width: 80%;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 56px;
+}
+
+.label-input-button {
+	border: 1px solid #B9C5CC;
+	background-color: #B9C5CC;
+	color: #306685;
+	font-size: 16px;
+	font-weight: 600;
+	display: inline-block;
+	padding: 12px 50px 12px 50px;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.addWorkForm input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #FFFFFF;
+	background-color: #a7a7a7 ;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	padding: 12px 50px 12px 50px;
+}

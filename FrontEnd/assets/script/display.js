@@ -57,16 +57,14 @@ export async function getDisplayOfWorks() {
 
 // // Affichage des travaux selon filtres 
 // export async function getWorkByCategory() {
-//     let works = await getWorks(); 
-//     for (const work of works) {
-//         let btn = document.getElementsByClassName("filterBtn")
-//         btn.addEventListener("click", () => {
+//     let btn = document.getElementsByClassName("filterBtn")
+//     btn.addEventListener("click", () => {
 //             console.log("test")
 //         })
 //     }
-// } 
+ 
 
-// Page si l'utilisateur est connecté 
+// Page lorsque l'utilisateur est connecté
 export function displayIfConnectedUser() {
     // Deconnexion de l'utilisateur 
     let btnDeco = document.getElementById("decoBtn");
@@ -74,6 +72,20 @@ export function displayIfConnectedUser() {
     btnDeco.addEventListener("click", () => {
         let deconnexion = window.localStorage.removeItem("token")
     })
+    // Bande noire sur le haut de page
+    let blackDiv = document.createElement("div")
+    blackDiv.classList.add("blackDiv")
+    let body = document.querySelector("body")
+    let header = document.querySelector("header")
+    body.appendChild(blackDiv)
+    body.insertBefore(blackDiv, header)
+    // Texte dans la bande noire 
+    let iconMode = document.createElement("i")
+    iconMode.setAttribute("class", "fa-regular fa-pen-to-square")
+    blackDiv.appendChild(iconMode)
+    let textMode = document.createElement("p")
+    textMode.textContent ="Mode édition"
+    blackDiv.appendChild(textMode)
     // Disparition du bouton "Tous"
     premierBtn.classList.add("displayNone");
     // Création d'une div pour le bouton "Modifier"

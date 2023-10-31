@@ -20,3 +20,4 @@ export async function getCategories(){
         console.log("Il y a une erreur dans l'appel à l'API")
     }
 }
+

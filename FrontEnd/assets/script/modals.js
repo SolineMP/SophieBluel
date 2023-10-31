@@ -126,16 +126,21 @@ export async function openModal () {
     selectCategoryInput.setAttribute("name", "category");
     selectCategoryInput.setAttribute("id", "category");
     let categories = await getCategories(); 
+    let optionCategory = document.createElement("option");
+    optionCategory.setAttribute("value", "")
+    optionCategory.setAttribute("selected", "selected")
+    selectCategoryInput.appendChild(optionCategory)
     for (let category of categories) {
-        let optionCategory = document.createElement("option");
-        optionCategory.setAttribute("value", category.name);
-        optionCategory.textContent = category.name;
-        selectCategoryInput.appendChild(optionCategory)
+        let optionCategoryArray = document.createElement("option")
+        optionCategoryArray.setAttribute("value", category.name);
+        optionCategoryArray.textContent = category.name;
+        selectCategoryInput.appendChild(optionCategoryArray)
     }
     //Place le bouton Submit
     let inputSubmitBtn = document.createElement("input")
     inputSubmitBtn.setAttribute("type", "submit")
     inputSubmitBtn.setAttribute("value", "Valider")
+    inputSubmitBtn.disabled = true; 
     addWorkForm.appendChild(inputSubmitBtn)
 
     // Disparition de la div "Gallerie photo" et apparition de la div "Ajout photo"
@@ -143,6 +148,7 @@ export async function openModal () {
         divGallery.classList.remove("active")
         divGallery.classList.add("displayNone")
         addWorkDiv.classList.add("active")
+        addWorkDiv.classList.remove("displayNone")
 
         // Fermeture de l'ajout de photo sans avoir ajouté de photo, retour sur la div "Gallerie Photo"
         leftArrow.addEventListener("click", () => {
@@ -156,4 +162,5 @@ export async function openModal () {
 
 
 }
+
 

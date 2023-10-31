@@ -142,14 +142,38 @@ export async function openModal () {
     inputSubmitBtn.setAttribute("value", "Valider")
     inputSubmitBtn.disabled = true; 
     addWorkForm.appendChild(inputSubmitBtn)
+    
+    // Récupération de la photo une fois intégrée au formulaire
+    addImageInput.addEventListener("change", () => {
+        let newImage = window.URL.createObjectURL(addImageInput.files[0]);
+        console.log(newImage)
+        let imgElement = document.createElement("img");
+        imgElement.src = newImage;
+        addImageDiv.appendChild(imgElement);
+        addImageIcon.classList.add("displayNone");
+        addImageLabel.classList.add("displayNone");
+        textAddImageDiv.classList.add("displayNone");
+        imgElement.setAttribute("id", "newImage");
+    })  
 
+    addWorkForm.addEventListener("change", () => {
+        let img = document.getElementById("newImage")
+        let title = inputAddTitle.value
+        let addCategory = document.getElementById("category")
+        console.log(img.src)
+        console.log(title)
+        console.log(addCategory.value)
+        let data = new FormData(img.src, title, addCategory.value)
+        console.log(data)
+    })
+
+    
     // Disparition de la div "Gallerie photo" et apparition de la div "Ajout photo"
     addWorkBtn.addEventListener("click", ()=> {
         divGallery.classList.remove("active")
         divGallery.classList.add("displayNone")
         addWorkDiv.classList.add("active")
         addWorkDiv.classList.remove("displayNone")
-
         // Fermeture de l'ajout de photo sans avoir ajouté de photo, retour sur la div "Gallerie Photo"
         leftArrow.addEventListener("click", () => {
             addWorkDiv.classList.remove("active");

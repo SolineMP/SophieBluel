@@ -82,7 +82,7 @@ export async function openModal () {
     addWorkDiv.appendChild(titleWork);
     // Place le formulaire de la div
     let addWorkForm = document.createElement("form"); 
-    addWorkForm.setAttribute("method", "#");
+    addWorkForm.setAttribute("method", "POST");
     addWorkForm.classList.add("addWorkForm");
     addWorkDiv.appendChild(addWorkForm); 
     // Place l'ensemble de la div pour ajouter une image
@@ -98,7 +98,7 @@ export async function openModal () {
     addImageDiv.appendChild(addImageLabel)
     let addImageInput = document.createElement("input");
     addImageInput.setAttribute("type", "file");
-    addImageInput.setAttribute("name", "picture");
+    addImageInput.setAttribute("id", "fileList");
     addImageInput.classList.add("displayNone")
     addImageLabel.appendChild(addImageInput);
     let textAddImageDiv = document.createElement("p"); 
@@ -132,7 +132,7 @@ export async function openModal () {
     selectCategoryInput.appendChild(optionCategory)
     for (let category of categories) {
         let optionCategoryArray = document.createElement("option")
-        optionCategoryArray.setAttribute("value", category.name);
+        optionCategoryArray.setAttribute("value", category.id);
         optionCategoryArray.textContent = category.name;
         selectCategoryInput.appendChild(optionCategoryArray)
     }
@@ -144,27 +144,99 @@ export async function openModal () {
     addWorkForm.appendChild(inputSubmitBtn)
     
     // Récupération de la photo une fois intégrée au formulaire
-    addImageInput.addEventListener("change", () => {
-        let newImage = window.URL.createObjectURL(addImageInput.files[0]);
-        console.log(newImage)
-        let imgElement = document.createElement("img");
-        imgElement.src = newImage;
+    function selectFile() {
+        let myFile = addImageInput.files[0]; 
+        let reader = new FileReader();
+        let imgElement = document.createElement("img")
+        
+        reader.addEventListener(
+            "load",
+            () => {
+                // on convertit l'image en une chaîne de caractères base64
+                imgElement.src = reader.result;
+            },
+            // false,
+            );
+            
+            if (myFile) {
+                reader.readAsDataURL(myFile);
+            }
+        imgElement.setAttribute("id", "newImage");
         addImageDiv.appendChild(imgElement);
+        imgElement.classList.add("active")
         addImageIcon.classList.add("displayNone");
         addImageLabel.classList.add("displayNone");
         textAddImageDiv.classList.add("displayNone");
-        imgElement.setAttribute("id", "newImage");
-    })  
-
+        return myFile
+        }
+        
+        // Affichage de l'image au chargement
+        addImageInput.addEventListener("change", () => {
+            let test = selectFile(); 
+        })
+    // Changement de l'input "Submit" si le form est complet
     addWorkForm.addEventListener("change", () => {
-        let img = document.getElementById("newImage")
-        let title = inputAddTitle.value
-        let addCategory = document.getElementById("category")
-        console.log(img.src)
-        console.log(title)
-        console.log(addCategory.value)
-        let data = new FormData(img.src, title, addCategory.value)
-        console.log(data)
+        let img = document.getElementById("newImage");
+        let title = inputAddTitle.value;
+        let addCategory = document.getElementById("category").value
+        // Vérification de la présence de tous les élements
+        while (img === "" && title === "" && addCategory === "") {
+            inputSubmitBtn.disabled = true;
+        } 
+        // Changement de style une fois tous les inputs remplis
+            inputSubmitBtn.disabled = false; 
+            inputSubmitBtn.classList.add("active")
+    })
+    // Requête création d'un nouveau travail
+    addWorkForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); 
+        let title = inputAddTitle.value;
+        let addCategory = document.getElementById("category").value
+        let myFile = addImageInput.files[0]
+        const token = window.localStorage.getItem("token")
+        const data = new FormData();
+        data.append("title", title);
+        data.append("image", myFile);
+        data.append("category", addCategory);
+        try {
+            const response = await fetch( "http://localhost:5678/api/works", {
+                method: 'POST', 
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: data
+            });
+            let result = await response.json()
+            if (response.ok === true) {
+                addWorkDiv.classList.remove("active")
+                addWorkDiv.classList.add("displayNone")
+                emptyGallery()
+                divGallery.classList.remove("displayNone")
+                smallWork.innerHTML = ""
+                let works = await getWorks();
+                for (const work of works) {
+                    // Création d'une div qui accueillera l'image et le bouton supprimer
+                    let smallFigure = document.createElement("div")
+                    smallFigure.classList.add("modalWork")
+                    smallWork.appendChild(smallFigure)
+                    // Création des différentes images
+                    let smallImg = document.createElement("img")
+                    smallImg.src = work.imageUrl; 
+                    // Attribution d'un ID pour augmenter sa spécificité
+                    smallImg.id = "modaleImage"; 
+                    smallFigure.appendChild(smallImg); 
+                    // Création du bouton "Supprimer"
+                    let deleteFigure = document.createElement("i");
+                    deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
+                    smallFigure.appendChild(deleteFigure); 
+                }
+
+                
+            }
+        } catch {
+            console.log("coucou")
+
+        }
     })
 
     
@@ -176,6 +248,7 @@ export async function openModal () {
         addWorkDiv.classList.remove("displayNone")
         // Fermeture de l'ajout de photo sans avoir ajouté de photo, retour sur la div "Gallerie Photo"
         leftArrow.addEventListener("click", () => {
+            emptyGallery()
             addWorkDiv.classList.remove("active");
             addWorkDiv.classList.add("displayNone")
             divGallery.classList.remove("displayNone")
@@ -183,6 +256,16 @@ export async function openModal () {
         } )
 
     })
+
+    function emptyGallery() {
+        addWorkForm.reset()
+        addImageInput.value = ""
+        let img = document.getElementById("newImage")
+        img.remove()
+        addImageIcon.classList.remove("displayNone");
+        addImageLabel.classList.remove("displayNone");
+        textAddImageDiv.classList.remove("displayNone");
+    }
 
 
 }

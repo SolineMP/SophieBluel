@@ -295,7 +295,7 @@ footer nav ul {
 .modal {
 	width: 95%;
 	max-width: 630px;
-	height: 688px;
+	height: auto;
 	padding: 30px;
 	background: #fff;
 	border-radius : 5px; 
@@ -459,6 +459,9 @@ footer nav ul {
 	padding: 12px 50px 12px 50px;
 }
 
+.addWorkForm input[type="submit"].active {
+	background-color: #1D6154;
+}
 
 #newImage {
 	height: 100%;

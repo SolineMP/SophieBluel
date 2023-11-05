@@ -55,6 +55,7 @@ export async function openModal () {
         // Création des différentes images
         let smallImg = document.createElement("img")
         smallImg.src = work.imageUrl; 
+        smallFigure.setAttribute("id", work.id)
         // Attribution d'un ID pour augmenter sa spécificité
         smallImg.id = "modaleImage"; 
         smallFigure.appendChild(smallImg); 
@@ -62,6 +63,20 @@ export async function openModal () {
         let deleteFigure = document.createElement("i");
         deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
         smallFigure.appendChild(deleteFigure); 
+
+        // Suppression d'un travail 
+        deleteFigure.addEventListener("click", async () => {
+            const token = window.localStorage.getItem("token")
+            const response = await fetch("http://localhost:5678/api/works/" + smallFigure.id, {
+                method: 'DELETE', 
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }, 
+                body : smallFigure.id
+            });
+        // Actualisation de la page     
+        refreshGallery()
+        }) 
     }
     // Ajout du bouton "Ajouter une photo"
     let addWorkBtn = document.createElement("button")
@@ -212,24 +227,7 @@ export async function openModal () {
                 addWorkDiv.classList.add("displayNone")
                 emptyGallery()
                 divGallery.classList.remove("displayNone")
-                smallWork.innerHTML = ""
-                let works = await getWorks();
-                for (const work of works) {
-                    // Création d'une div qui accueillera l'image et le bouton supprimer
-                    let smallFigure = document.createElement("div")
-                    smallFigure.classList.add("modalWork")
-                    smallWork.appendChild(smallFigure)
-                    // Création des différentes images
-                    let smallImg = document.createElement("img")
-                    smallImg.src = work.imageUrl; 
-                    // Attribution d'un ID pour augmenter sa spécificité
-                    smallImg.id = "modaleImage"; 
-                    smallFigure.appendChild(smallImg); 
-                    // Création du bouton "Supprimer"
-                    let deleteFigure = document.createElement("i");
-                    deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
-                    smallFigure.appendChild(deleteFigure); 
-                }
+                refreshGallery()
 
                 
             }
@@ -238,7 +236,6 @@ export async function openModal () {
 
         }
     })
-
     
     // Disparition de la div "Gallerie photo" et apparition de la div "Ajout photo"
     addWorkBtn.addEventListener("click", ()=> {
@@ -265,6 +262,27 @@ export async function openModal () {
         addImageIcon.classList.remove("displayNone");
         addImageLabel.classList.remove("displayNone");
         textAddImageDiv.classList.remove("displayNone");
+    }
+
+    async function refreshGallery() {
+        smallWork.innerHTML = ""
+        let works = await getWorks();
+        for (const work of works) {
+            // Création d'une div qui accueillera l'image et le bouton supprimer
+            let smallFigure = document.createElement("div")
+            smallFigure.classList.add("modalWork")
+            smallWork.appendChild(smallFigure)
+            // Création des différentes images
+            let smallImg = document.createElement("img")
+            smallImg.src = work.imageUrl; 
+            // Attribution d'un ID pour augmenter sa spécificité
+            smallImg.id = "modaleImage"; 
+            smallFigure.appendChild(smallImg); 
+            // Création du bouton "Supprimer"
+            let deleteFigure = document.createElement("i");
+            deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
+            smallFigure.appendChild(deleteFigure); 
+        }
     }
 
 

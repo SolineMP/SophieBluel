@@ -55,7 +55,7 @@ export async function openModal () {
         // Création des différentes images
         let smallImg = document.createElement("img")
         smallImg.src = work.imageUrl; 
-        smallFigure.setAttribute("id", work.id)
+        smallFigure.dataset.id = work.id; 
         // Attribution d'un ID pour augmenter sa spécificité
         smallImg.id = "modaleImage"; 
         smallFigure.appendChild(smallImg); 
@@ -67,15 +67,21 @@ export async function openModal () {
         // Suppression d'un travail 
         deleteFigure.addEventListener("click", async () => {
             const token = window.localStorage.getItem("token")
-            const response = await fetch("http://localhost:5678/api/works/" + smallFigure.id, {
+            const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
                 method: 'DELETE', 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }, 
-                body : smallFigure.id
-            });
-        // Actualisation de la page     
-        refreshGallery()
+                body : smallFigure.dataset.id
+            })
+            .then(() => {
+            // Actualisation de la page     
+                refreshModal()
+                refreshGallery()
+            })
+            .catch((error) => {
+                console.log("Il y a une erreur")
+            })
         }) 
     }
     // Ajout du bouton "Ajouter une photo"
@@ -213,28 +219,28 @@ export async function openModal () {
         data.append("title", title);
         data.append("image", myFile);
         data.append("category", addCategory);
-        try {
             const response = await fetch( "http://localhost:5678/api/works", {
                 method: 'POST', 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
                 body: data
-            });
-            let result = await response.json()
-            if (response.ok === true) {
-                addWorkDiv.classList.remove("active")
-                addWorkDiv.classList.add("displayNone")
-                emptyGallery()
-                divGallery.classList.remove("displayNone")
-                refreshGallery()
+            })
+            const newData = await response.json()
+            .then((newData) => {
+                if (response.ok === true) {
+                    addWorkDiv.classList.remove("active")
+                    addWorkDiv.classList.add("displayNone")
+                    emptyModal()
+                    divGallery.classList.remove("displayNone")
+                    refreshModal()
+                    refreshGallery()
+                }   
+            })
+            .catch((error) => {
+                console.log("Il y a une erreur")
+            })  
 
-                
-            }
-        } catch {
-            console.log("coucou")
-
-        }
     })
     
     // Disparition de la div "Gallerie photo" et apparition de la div "Ajout photo"
@@ -245,7 +251,7 @@ export async function openModal () {
         addWorkDiv.classList.remove("displayNone")
         // Fermeture de l'ajout de photo sans avoir ajouté de photo, retour sur la div "Gallerie Photo"
         leftArrow.addEventListener("click", () => {
-            emptyGallery()
+            emptyModal()
             addWorkDiv.classList.remove("active");
             addWorkDiv.classList.add("displayNone")
             divGallery.classList.remove("displayNone")
@@ -254,17 +260,19 @@ export async function openModal () {
 
     })
 
-    function emptyGallery() {
+    function emptyModal() {
         addWorkForm.reset()
         addImageInput.value = ""
         let img = document.getElementById("newImage")
-        img.remove()
+        if (img !== null) {
+            img.remove()
+        }
         addImageIcon.classList.remove("displayNone");
         addImageLabel.classList.remove("displayNone");
         textAddImageDiv.classList.remove("displayNone");
     }
 
-    async function refreshGallery() {
+    async function refreshModal() {
         smallWork.innerHTML = ""
         let works = await getWorks();
         for (const work of works) {
@@ -283,6 +291,27 @@ export async function openModal () {
             deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
             smallFigure.appendChild(deleteFigure); 
         }
+    }
+
+    async function refreshGallery() {
+            // Récupération des travaux depuis l'API
+        let displayWorks = await getWorks();
+        for (const displayWork of displayWorks) {
+        // Récupération de l'élément du DOM qui accueillera les travaux 
+            const sectionGallery = document.querySelector(".gallery");
+        // Création d'une balise qui accueillera les éléments des travaux 
+            const pieceElement = document.createElement("figure"); 
+        // Création des différents élements contenus dans la balise figure
+            const imgElement = document.createElement("img");
+            imgElement.src = displayWork.imageUrl;
+            imgElement.setAttribute("alt", "Photo représentant le travail de Sophie Bluel");
+            const nomElement = document.createElement("figurecaption");
+            nomElement.innerText = displayWork.title ;
+        // Création des emplacements sur le DOM
+            sectionGallery.appendChild(pieceElement); 
+            pieceElement.appendChild(imgElement);
+            pieceElement.appendChild(nomElement);
+    }
     }
 
 

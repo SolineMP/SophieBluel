@@ -42,6 +42,7 @@ export async function getDisplayOfWorks() {
         const sectionGallery = document.querySelector(".gallery");
         // Création d'une balise qui accueillera les éléments des travaux 
         const pieceElement = document.createElement("figure"); 
+        pieceElement.dataset.id = displayWork.categoryId
         // Création des différents élements contenus dans la balise figure
         const imgElement = document.createElement("img");
         imgElement.src = displayWork.imageUrl;
@@ -54,16 +55,6 @@ export async function getDisplayOfWorks() {
         pieceElement.appendChild(nomElement);
     }
 } 
-
-// // Affichage des travaux selon filtres 
-// export async function getWorkByCategory() {
-//     let btn = document.getElementsByClassName("filterBtn")
-//     btn.addEventListener("click", () => {
-//             console.log("test")
-//         })
-//     }
- 
-
 // Page lorsque l'utilisateur est connecté
 export function displayIfConnectedUser() {
     // Deconnexion de l'utilisateur 
@@ -105,6 +96,30 @@ export function displayIfConnectedUser() {
     // Ouverture de la modale 
     openModal(); 
 }
-
+// Affichage selon filtre
+window.onload = (event) => {
+    let filterBtn = document.querySelectorAll(".filterBtn")
+    for (let i = 0; i < filterBtn.length; i++) {
+        let element = filterBtn[i]
+        element.addEventListener("click", () => {
+            let gallery = document.querySelector(".gallery")
+            if (element.dataset.id == 0) {
+                console.log("je ne sais pas encore quoi faire")
+            } else if (element.dataset.id > 0) {
+                let figures = gallery.querySelectorAll("figure")
+                let figureArray = Array.prototype.slice.call(figures)
+                for (const figure of figureArray) {
+                    let filterFigure = figureArray.filter(figure => figure.dataset.id === element.dataset.id)
+                    gallery.innerHTML = ""
+                    filterFigure.forEach(el => {
+                        console.log(el)
+                        gallery.appendChild(el)
+                        console.log(figures)
+                    });
+                }
+            }
+        })
+    }
+};
 
 

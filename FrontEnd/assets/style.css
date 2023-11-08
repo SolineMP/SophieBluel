@@ -302,7 +302,7 @@ footer nav ul {
 	position: absolute;
 	top : 40%; 
 	left: 50%; 
-	transform: translate(-50%, -50%);
+	transform: translate(-45%, -40%);
 	text-align: center;
 }
 
@@ -468,3 +468,6 @@ footer nav ul {
 	height: 100%;
 	object-fit: contain;
 }
+
+/* TEST */
+

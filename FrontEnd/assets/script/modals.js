@@ -165,6 +165,7 @@ export async function openModal () {
     }
     //Place le bouton Submit
     let inputSubmitBtn = document.createElement("input")
+    inputSubmitBtn.classList.add("test")
     inputSubmitBtn.setAttribute("type", "submit")
     inputSubmitBtn.setAttribute("value", "Valider")
     inputSubmitBtn.disabled = true; 
@@ -207,12 +208,13 @@ export async function openModal () {
         let title = inputAddTitle.value;
         let addCategory = document.getElementById("category").value
         // Vérification de la présence de tous les élements
-        while (img === "" && title === "" && addCategory === "") {
-            inputSubmitBtn.disabled = true;
-        } 
-        // Changement de style une fois tous les inputs remplis
-            inputSubmitBtn.disabled = false; 
+        let isNotEmpty = img && title && addCategory  
+        // Changement de style une fois tous les inputs remplis 
+        if (isNotEmpty) {
             inputSubmitBtn.classList.add("active")
+            inputSubmitBtn.disabled = false;
+        }
+            
     })
     // Requête création d'un nouveau travail
     addWorkForm.addEventListener("submit", async (event) => {
@@ -232,9 +234,9 @@ export async function openModal () {
                 },
                 body: data
             })
-            const newData = await response.json()
-            .then((newData) => {
-                if (response.ok === true) {
+            .then((response) => response.json())
+            .then( (newData) => {
+                if (newData) {
                     addWorkDiv.classList.remove("active")
                     addWorkDiv.classList.add("displayNone")
                     emptyModal()
@@ -243,10 +245,9 @@ export async function openModal () {
                     refreshGallery()
                 }   
             })
-            .catch((error) => {
+            .catch(() => {
                 console.log("Il y a une erreur")
             })  
-
     })
     
     // Disparition de la div "Gallerie photo" et apparition de la div "Ajout photo"
@@ -276,35 +277,19 @@ export async function openModal () {
         addImageIcon.classList.remove("displayNone");
         addImageLabel.classList.remove("displayNone");
         textAddImageDiv.classList.remove("displayNone");
+        const inputSubmitBtn = addWorkForm.querySelector(".test")
+        inputSubmitBtn.classList.remove("active")
+        inputSubmitBtn.disabled = true;
     }
 
-    async function refreshModal() {
-        smallWork.innerHTML = ""
-        let works = await getWorks();
-        for (const work of works) {
-            // Création d'une div qui accueillera l'image et le bouton supprimer
-            let smallFigure = document.createElement("div")
-            smallFigure.classList.add("modalWork")
-            smallWork.appendChild(smallFigure)
-            // Création des différentes images
-            let smallImg = document.createElement("img")
-            smallImg.src = work.imageUrl; 
-            // Attribution d'un ID pour augmenter sa spécificité
-            smallImg.id = "modaleImage"; 
-            smallFigure.appendChild(smallImg); 
-            // Création du bouton "Supprimer"
-            let deleteFigure = document.createElement("i");
-            deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
-            smallFigure.appendChild(deleteFigure); 
-        }
-    }
 
     async function refreshGallery() {
             // Récupération des travaux depuis l'API
+            const sectionGallery = document.querySelector(".gallery");
+            sectionGallery.innerHTML = "";
         let displayWorks = await getWorks();
         for (const displayWork of displayWorks) {
         // Récupération de l'élément du DOM qui accueillera les travaux 
-            const sectionGallery = document.querySelector(".gallery");
         // Création d'une balise qui accueillera les éléments des travaux 
             const pieceElement = document.createElement("figure"); 
         // Création des différents élements contenus dans la balise figure

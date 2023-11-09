@@ -96,30 +96,24 @@ export function displayIfConnectedUser() {
     // Ouverture de la modale 
     openModal(); 
 }
-// Affichage selon filtre
-window.onload = (event) => {
-    let filterBtn = document.querySelectorAll(".filterBtn")
-    for (let i = 0; i < filterBtn.length; i++) {
-        let element = filterBtn[i]
+//Boutons filtre
+window.onload = () => {
+    let filterBtns = document.querySelectorAll(".filterBtn")
+    const travaux = document.querySelector(".gallery")
+    let figures = travaux.querySelectorAll("figure")
+    for (let element of filterBtns) {
         element.addEventListener("click", () => {
-            let gallery = document.querySelector(".gallery")
-            if (element.dataset.id == 0) {
-                console.log("je ne sais pas encore quoi faire")
-            } else if (element.dataset.id > 0) {
-                let figures = gallery.querySelectorAll("figure")
-                let figureArray = Array.prototype.slice.call(figures)
-                for (const figure of figureArray) {
-                    let filterFigure = figureArray.filter(figure => figure.dataset.id === element.dataset.id)
-                    gallery.innerHTML = ""
-                    filterFigure.forEach(el => {
-                        console.log(el)
-                        gallery.appendChild(el)
-                        console.log(figures)
-                    });
+            for (let figure of figures){
+                if (element.dataset.id == 0) {
+                    figure.classList.remove("displayNone")
+                } else {
+                    let isDifferentDataSetId = (figure.dataset.id !== element.dataset.id)
+                    figure.classList.toggle("displayNone", isDifferentDataSetId)
                 }
             }
         })
     }
-};
+}
+
 
 

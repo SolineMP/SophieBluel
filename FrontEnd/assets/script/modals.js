@@ -64,25 +64,25 @@ export async function openModal () {
         deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
         smallFigure.appendChild(deleteFigure); 
 
-        // Suppression d'un travail 
-        deleteFigure.addEventListener("click", async () => {
-            const token = window.localStorage.getItem("token")
-            const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
-                method: 'DELETE', 
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }, 
-                body : smallFigure.dataset.id
-            })
-            .then(() => {
-            // Actualisation de la page     
-                refreshModal()
-                refreshGallery()
-            })
-            .catch((error) => {
-                console.log("Il y a une erreur")
-            })
-        }) 
+        // // Suppression d'un travail 
+        // deleteFigure.addEventListener("click", async () => {
+        //     const token = window.localStorage.getItem("token")
+        //     const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
+        //         method: 'DELETE', 
+        //         headers: {
+        //             'Authorization': `Bearer ${token}`
+        //         }, 
+        //         body : smallFigure.dataset.id
+        //     })
+        //     .then(() => {
+        //     // Actualisation de la page     
+        //         refreshModal()
+        //         refreshGallery()
+        //     })
+        //     .catch((error) => {
+        //         console.log("Il y a une erreur")
+        //     })
+        // }) 
     }
     // Ajout du bouton "Ajouter une photo"
     let addWorkBtn = document.createElement("button")
@@ -313,8 +313,42 @@ export async function openModal () {
             pieceElement.appendChild(nomElement);
     }
     }
+    // // Delete Work
+    // modal.onload = () => {
+    //             const smallFig = document.querySelector(".modalWork")
+    //             let deleteFigures = smallFig.querySelectorAll("i")
+    //             // Suppression d'un travail 
+    //             for ( let deleteFigure of deleteFigures) {
+    //                 console.log(deleteFigure)
+    //             }
+    // }
 
 
 }
 
+const modal = document.querySelector(".modal")
+modal.onload = () => {
+    console.log("la modale a terminé de charger")
+}
 
+
+
+// deleteFigure.addEventListener("click", async () => {
+//     console.log(deleteFigure)
+//     const token = window.localStorage.getItem("token")
+//     const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
+//         method: 'DELETE', 
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }, 
+//         body : smallFigure.dataset.id
+//     })
+//     .then(() => {
+//     // Actualisation de la page     
+//         refreshModal()
+//         refreshGallery()
+//     })
+//     .catch((error) => {
+//         console.log("Il y a une erreur")
+//     })
+// }) 

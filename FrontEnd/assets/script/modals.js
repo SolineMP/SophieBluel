@@ -46,43 +46,49 @@ export async function openModal () {
     };
     // Ajout des photos des travaux
     // Récupération des travaux de l'API
-    let works = await getWorks();
-    for (const work of works) {
-        // Création d'une div qui accueillera l'image et le bouton supprimer
-        let smallFigure = document.createElement("div")
-        smallFigure.classList.add("modalWork")
-        smallWork.appendChild(smallFigure)
-        // Création des différentes images
-        let smallImg = document.createElement("img")
-        smallImg.src = work.imageUrl; 
-        smallFigure.dataset.id = work.id; 
-        // Attribution d'un ID pour augmenter sa spécificité
-        smallImg.id = "modaleImage"; 
-        smallFigure.appendChild(smallImg); 
-        // Création du bouton "Supprimer"
-        let deleteFigure = document.createElement("i");
-        deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
-        smallFigure.appendChild(deleteFigure); 
-
-        // // Suppression d'un travail 
-        // deleteFigure.addEventListener("click", async () => {
-        //     const token = window.localStorage.getItem("token")
-        //     const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
-        //         method: 'DELETE', 
-        //         headers: {
-        //             'Authorization': `Bearer ${token}`
-        //         }, 
-        //         body : smallFigure.dataset.id
-        //     })
-        //     .then(() => {
-        //     // Actualisation de la page     
-        //         refreshModal()
-        //         refreshGallery()
-        //     })
-        //     .catch((error) => {
-        //         console.log("Il y a une erreur")
-        //     })
-        // }) 
+    fillModale()
+    
+    async function fillModale() {
+        let works = await getWorks();
+        let modalFigureContainer = document.querySelector(".modalFigure")
+        modalFigureContainer.innerHTML = ""
+        for (const work of works) {
+            // Création d'une div qui accueillera l'image et le bouton supprimer
+            let smallFigure = document.createElement("div")
+            smallFigure.classList.add("modalWork")
+            smallWork.appendChild(smallFigure)
+            // Création des différentes images
+            let smallImg = document.createElement("img")
+            smallImg.src = work.imageUrl; 
+            smallFigure.dataset.id = work.id; 
+            // Attribution d'un ID pour augmenter sa spécificité
+            smallImg.id = "modaleImage"; 
+            smallFigure.appendChild(smallImg); 
+            // Création du bouton "Supprimer"
+            let deleteFigure = document.createElement("i");
+            deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
+            smallFigure.appendChild(deleteFigure); 
+    
+            // Suppression d'un travail 
+            deleteFigure.addEventListener("click", async () => {
+                const token = window.localStorage.getItem("token")
+                const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
+                    method: 'DELETE', 
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }, 
+                    body : smallFigure.dataset.id
+                })
+                .then(() => {
+                // Actualisation de la page     
+                    fillModale()
+                    refreshGallery()
+                })
+                .catch((error) => {
+                    console.log("Il y a une erreur")
+                })
+            }) 
+        }
     }
     // Ajout du bouton "Ajouter une photo"
     let addWorkBtn = document.createElement("button")
@@ -233,7 +239,7 @@ export async function openModal () {
                     addWorkDiv.classList.add("displayNone")
                     emptyModal()
                     divGallery.classList.remove("displayNone")
-                    refreshModal()
+                    fillModale()
                     refreshGallery()
                 }   
             })
@@ -313,42 +319,7 @@ export async function openModal () {
             pieceElement.appendChild(nomElement);
     }
     }
-    // // Delete Work
-    // modal.onload = () => {
-    //             const smallFig = document.querySelector(".modalWork")
-    //             let deleteFigures = smallFig.querySelectorAll("i")
-    //             // Suppression d'un travail 
-    //             for ( let deleteFigure of deleteFigures) {
-    //                 console.log(deleteFigure)
-    //             }
-    // }
-
 
 }
 
-const modal = document.querySelector(".modal")
-modal.onload = () => {
-    console.log("la modale a terminé de charger")
-}
 
-
-
-// deleteFigure.addEventListener("click", async () => {
-//     console.log(deleteFigure)
-//     const token = window.localStorage.getItem("token")
-//     const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
-//         method: 'DELETE', 
-//         headers: {
-//             'Authorization': `Bearer ${token}`
-//         }, 
-//         body : smallFigure.dataset.id
-//     })
-//     .then(() => {
-//     // Actualisation de la page     
-//         refreshModal()
-//         refreshGallery()
-//     })
-//     .catch((error) => {
-//         console.log("Il y a une erreur")
-//     })
-// }) 

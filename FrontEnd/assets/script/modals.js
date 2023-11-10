@@ -1,16 +1,19 @@
 // Ouverture de la modale 
-
 import { getCategories, getWorks } from "./api.js"
+
+const link = "http://localhost:5678/api/works/";
 
 export async function openModal () {
     // CREATION DE LA MODALE
+    const main = document.querySelector("main")
+    const divModal = document.createElement("div")
+    main.appendChild(divModal)
     let modalBtn = document.querySelector(".modal-btn")
     modalBtn.classList.add("modal-trigger")
-    let sectionIntroduction = document.getElementById("introduction")
     // place le container de la modale
     let modalContainer = document.createElement("div")
     modalContainer.classList.add("modal-container")
-    sectionIntroduction.appendChild(modalContainer)
+    divModal.appendChild(modalContainer)
     // Place l'overlay de la modale
     let modalOverlay = document.createElement("div")
     modalOverlay.classList.add("overlay", "modal-trigger")
@@ -72,7 +75,7 @@ export async function openModal () {
             // Suppression d'un travail 
             deleteFigure.addEventListener("click", async () => {
                 const token = window.localStorage.getItem("token")
-                const response = await fetch("http://localhost:5678/api/works/" + smallFigure.dataset.id, {
+                const response = await fetch( link + smallFigure.dataset.id, {
                     method: 'DELETE', 
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -227,7 +230,7 @@ export async function openModal () {
         data.append("title", title);
         data.append("image", myFile);
         data.append("category", addCategory);
-            const response = await fetch( "http://localhost:5678/api/works", {
+            const response = await fetch( link, {
                 method: 'POST', 
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -246,7 +249,7 @@ export async function openModal () {
                 }   
             })
             .catch(() => {
-                console.log("Il y a une erreur")
+                    console.log("Il y a une erreur")
             })  
     })
     

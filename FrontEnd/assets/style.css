@@ -50,18 +50,18 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
+	max-width: 1940px;
+	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 25px;
 }
 section {
-	margin: 50px 0
+	margin: 50px 25px;
 }
 
 h1{
@@ -267,7 +267,10 @@ footer nav ul {
 	cursor: pointer;
 	border: none;
 	background: none; 
-	font-family: 'Work Sans'
+	font-family: 'Work Sans';
+	position: absolute;
+	top: 95%;
+	right: 36%;
 }
 
 .modal-btn i {
@@ -279,7 +282,8 @@ footer nav ul {
 	position: fixed; 
 	top: 0; 
 	width: 100%;
-	height: 100%;	
+	height: 100%;
+	margin: 0!important;	
 }
 
 .active {
@@ -295,7 +299,7 @@ footer nav ul {
 
 .modal {
 	width: 95%;
-	max-width: 630px;
+	max-width: 500px;
 	height: auto;
 	padding: 30px;
 	background: #fff;
@@ -337,6 +341,7 @@ footer nav ul {
 	margin-left: 50px;
 	padding-bottom: 70px;
 	border-bottom: 1px solid grey;
+	align-items: center;
 }
 
 .modalWork {

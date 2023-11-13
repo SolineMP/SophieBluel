@@ -80,11 +80,12 @@ export function displayIfConnectedUser() {
     // Disparition du bouton "Tous"
     premierBtn.classList.add("displayNone");
     // Création d'une div pour le bouton "Modifier"
-    let updateBtn = document.createElement("button");
+    const updateBtn = document.createElement("button");
+    const portfolioTitle = document.getElementById("portfolioTitle")
     updateBtn.classList.add("modal-btn", "modal-trigger")
-    updateBtn.textContent = "modifier"
-    sectionPortfolio.appendChild(updateBtn);
-    sectionPortfolio.insertBefore(updateBtn, filterDiv)
+    updateBtn.textContent = "modifier";
+    portfolioTitle.appendChild(updateBtn);
+    //sectionPortfolio.insertBefore(updateBtn, filterDiv)
     // Ajout de l'icone
     let iconUpdate = document.createElement("i")
     iconUpdate.setAttribute("class", "fa-regular fa-pen-to-square")

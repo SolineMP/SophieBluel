@@ -259,6 +259,11 @@ footer nav ul {
 
 /* Fenêtre modale */
 
+#portfolioTitle {
+	display: flex;
+	justify-content: center;
+}
+
 .modal-btn {
 	display: flex;
 	flex-direction: row-reverse;
@@ -268,9 +273,6 @@ footer nav ul {
 	border: none;
 	background: none; 
 	font-family: 'Work Sans';
-	position: absolute;
-	top: 95%;
-	right: 36%;
 }
 
 .modal-btn i {

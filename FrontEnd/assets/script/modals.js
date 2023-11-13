@@ -203,22 +203,45 @@ export async function openModal () {
         
         // Affichage de l'image au chargement
         addImageInput.addEventListener("change", () => {
-            let test = selectFile(); 
+            selectFile(); 
         })
     // Changement de l'input "Submit" si le form est complet
+    let isImgAndSelectValid = false; // image + select
+    let isTitleValid = false; // titre
+    function isFormValid() {
+      if (isImgAndSelectValid && isTitleValid) {
+        console.log("FORM IS VALID");
+        inputSubmitBtn.classList.add("active")
+        inputSubmitBtn.disabled = false;
+        return true;
+      } else {
+        console.log("Le formulaire n'est pas totalement rempli");
+        return false;
+      }
+    }
+    // Image + select eventListener
     addWorkForm.addEventListener("change", () => {
-        let img = document.getElementById("newImage");
-        let title = inputAddTitle.value;
-        let addCategory = document.getElementById("category").value
-        // Vérification de la présence de tous les élements
-        let isNotEmpty = img && title && addCategory  
-        // Changement de style une fois tous les inputs remplis 
-        if (isNotEmpty) {
-            inputSubmitBtn.classList.add("active")
-            inputSubmitBtn.disabled = false;
-        }
-            
-    })
+      let img = document.getElementById("newImage");
+      // let title = inputAddTitle.value;
+      let addCategory = document.getElementById("category").value;
+      // Vérification de la présence de tous les élements
+      let isNotEmpty = img && addCategory;
+      if (isNotEmpty) {
+        isImgAndSelectValid = true;
+      } else {
+        isImgAndSelectValid = false;
+      }
+      isFormValid();
+    });
+    inputAddTitle.addEventListener("input", () => {
+      const inputLength = inputAddTitle.value.length;
+      if (inputLength > 0) {
+        isTitleValid = true;
+      } else {
+        isTitleValid = false;
+      }
+      isFormValid();
+    });
     // Requête création d'un nouveau travail
     addWorkForm.addEventListener("submit", async (event) => {
         event.preventDefault(); 

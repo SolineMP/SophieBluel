@@ -1,4 +1,4 @@
-## ATTENTION : Ce projet ayant pour but de nous faire travailler sur les versions d'un projet, vous devez changer de branche vers la branche devDevFronted 
+## ATTENTION : Ce projet ayant pour but de nous faire travailler sur les versions d'un projet, vous devez changer de branche vers la branche devFronted 
 
 # Portfolio de l'architecte Sophie Bluel
 ## À propos 
@@ -18,7 +18,7 @@ Projet n°6 de la formation de Testeur de logiciel. Mise en place d'un site port
 Installation de node.js, npm et liveServer. 
 ## Installation
  - Cloner le code
- - Changer de branche vers la branche devDevFrontend
+ - Changer de branche vers la branche devFrontend
  - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
  - Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
  - Lancez votre projet en local avec liveServer.

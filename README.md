@@ -18,7 +18,7 @@ Projet n°6 de la formation de Testeur de logiciel. Mise en place d'un site port
 Installation de node.js, npm et liveServer. 
 ## Installation
  - Cloner le code
- - Changer de branche vers la branche devFrontend
+ - Changer de branche vers la branche devFrontEnd
  - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
  - Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
  - Lancez votre projet en local avec liveServer.

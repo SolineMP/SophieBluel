@@ -1,6 +1,6 @@
 # Portfolio de l'architecte Sophie Bluel
 ## À propos 
-Projet n°6 de la formation de Testeur de logiciel. Mise en place d'un site portfolio pour une architecte. 
+Projet n°7 de la formation de Testeur de logiciel. Mise en place d'un site portfolio pour une architecte. 
 # Table des matières 
 | ~~~~~~~~~~~~~~ |
 |-------|

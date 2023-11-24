@@ -22,11 +22,15 @@ Installation de node.js, npm et liveServer.
  - Naviguer 
 
 ## Utilisation
-Visualisation de l'ensemble des projets
-Connection via l'onglet "login" vers l'espace utilisateur. Possibilité d'ajouter/supprimer des travaux.
+- Visualisation de l'ensemble des projets
+- Connection via l'onglet "login" vers l'espace utilisateur. 
+- Possibilité d'ajouter/supprimer des travaux si on est connecté 
+
 ## Construit avec
 ### Langages
-HTML CSS JavaScript
+[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 ## Documentation
 [Lien vers la documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 ## Instructions
@@ -35,3 +39,4 @@ HTML CSS JavaScript
 - Gérér les événements utilisateurs avec JavaScript 
 - Manipuler des éléments du DOM avec JavaScript 
 - Récupérer les données utilisateurs dans le JavaScript via des formulaires 
+- Création d'une modale 

@@ -1,4 +1,4 @@
-## ATTENTION : Ce projet ayant pour but de nous faire travailler sur les versions d'un projet, vous devez changer de branche vers la branche devFronted 
+## ATTENTION : Ce projet ayant pour but de nous faire travailler sur les versions d'un projet, vous devez changer de branche vers la branche devFrontEnd 
 
 # Portfolio de l'architecte Sophie Bluel
 ## À propos 

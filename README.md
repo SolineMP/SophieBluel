@@ -19,8 +19,8 @@ Installation de node.js, npm et liveServer.
 ## Installation
  - Cloner le code
  - Changer de branche vers la branche devFrontEnd
- - Ouvre une première instance avec seulement le backend, lancez la commande "**npm start**". 
- - Ouvre une seconde instance avec seulement le frontend, lancez avec liveServer.
+ - Ouvrez une première instance avec seulement le backend, lancez la commande "**npm start**". 
+ - Ouvrez une seconde instance avec seulement le frontend, lancez avec liveServer.
  - Lancez votre projet en local avec liveServer.
  - Naviguer 
 

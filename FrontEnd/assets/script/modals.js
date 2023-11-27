@@ -8,36 +8,36 @@ export async function openModal () {
     const main = document.querySelector("main")
     const divModal = document.createElement("div")
     main.appendChild(divModal)
-    let modalBtn = document.querySelector(".modal-btn")
+    const modalBtn = document.querySelector(".modal-btn")
     modalBtn.classList.add("modal-trigger")
     // place le container de la modale
-    let modalContainer = document.createElement("div")
+    const modalContainer = document.createElement("div")
     modalContainer.classList.add("modal-container")
     divModal.appendChild(modalContainer)
     // Place l'overlay de la modale
-    let modalOverlay = document.createElement("div")
+    const modalOverlay = document.createElement("div")
     modalOverlay.classList.add("overlay", "modal-trigger")
     modalContainer.appendChild(modalOverlay)
     // Place le contenu de la modale 
-    let modal = document.createElement("div")
+    const modal = document.createElement("div")
     modal.classList.add("modal")
     modalContainer.appendChild(modal)
     // Place le bouton de fermeture de la modale
-    let closeModal = document.createElement("button")
+    const closeModal = document.createElement("button")
     closeModal.classList.add("close-modal", "modal-trigger")
     closeModal.textContent = "×"
     modal.appendChild(closeModal)
     //CRÉATION DE LA DIV "GALLERIE PHOTO"
     // Placement d'une div active qui englobera la partie "Galerie photo"
-    let divGallery = document.createElement("div"); 
+    const divGallery = document.createElement("div"); 
     modal.appendChild(divGallery);
     divGallery.classList.add("active");
     // Placement du texte + style pour le texte  
-    let titleModal = document.createElement("h3")
+    const titleModal = document.createElement("h3")
     titleModal.textContent = "Galerie photo"
     divGallery.appendChild(titleModal)
     // Création d'une div pour les images
-    let smallWork = document.createElement("div"); 
+    const smallWork = document.createElement("div"); 
     smallWork.classList.add("modalFigure")
     divGallery.appendChild(smallWork);
     // Affichage au clic 
@@ -52,23 +52,23 @@ export async function openModal () {
     fillModale()
     
     async function fillModale() {
-        let works = await getWorks();
-        let modalFigureContainer = document.querySelector(".modalFigure")
+        const works = await getWorks();
+        const modalFigureContainer = document.querySelector(".modalFigure")
         modalFigureContainer.innerHTML = ""
         for (const work of works) {
             // Création d'une div qui accueillera l'image et le bouton supprimer
-            let smallFigure = document.createElement("div")
+            const smallFigure = document.createElement("div")
             smallFigure.classList.add("modalWork")
             smallWork.appendChild(smallFigure)
             // Création des différentes images
-            let smallImg = document.createElement("img")
+            const smallImg = document.createElement("img")
             smallImg.src = work.imageUrl; 
             smallFigure.dataset.id = work.id; 
             // Attribution d'un ID pour augmenter sa spécificité
             smallImg.id = "modaleImage"; 
             smallFigure.appendChild(smallImg); 
             // Création du bouton "Supprimer"
-            let deleteFigure = document.createElement("i");
+            const deleteFigure = document.createElement("i");
             deleteFigure.setAttribute("class", "fa-solid fa-trash-can");
             smallFigure.appendChild(deleteFigure); 
     
@@ -94,74 +94,74 @@ export async function openModal () {
         }
     }
     // Ajout du bouton "Ajouter une photo"
-    let addWorkBtn = document.createElement("button")
+    const addWorkBtn = document.createElement("button")
     divGallery.appendChild(addWorkBtn);
     addWorkBtn.textContent = "Ajouter une photo";
     addWorkBtn.classList.add("addWorkBtn");
     // CREATION DE LA DIV AJOUT PHOTO 
-    let addWorkDiv = document.createElement("div");
+    const addWorkDiv = document.createElement("div");
     addWorkDiv.classList.add("displayNone");
     modal.appendChild(addWorkDiv);
     // Création de la flèche de retour en arrière
-    let leftArrow = document.createElement("i");
+    const leftArrow = document.createElement("i");
     leftArrow.setAttribute("class", "fa-solid fa-arrow-left returnGallery");
     addWorkDiv.appendChild(leftArrow);
     // PLace le titre de la div
-    let titleWork = document.createElement("h3");
+    const titleWork = document.createElement("h3");
     titleWork.textContent = "Ajout photo"; 
     addWorkDiv.appendChild(titleWork);
     // Place le formulaire de la div
-    let addWorkForm = document.createElement("form"); 
+    const addWorkForm = document.createElement("form"); 
     addWorkForm.setAttribute("method", "POST");
     addWorkForm.classList.add("addWorkForm");
     addWorkDiv.appendChild(addWorkForm); 
     // Place l'ensemble de la div pour ajouter une image
-    let addImageDiv = document.createElement("div");
+    const addImageDiv = document.createElement("div");
     addImageDiv.classList.add("divAddImage")
     addWorkForm.appendChild(addImageDiv);
-    let addImageIcon = document.createElement("i")
+    const addImageIcon = document.createElement("i")
     addImageIcon.setAttribute("class", "fa-regular fa-image")
     addImageDiv.appendChild(addImageIcon)
-    let addImageLabel = document.createElement("label")
+    const addImageLabel = document.createElement("label")
     addImageLabel.setAttribute("class", "label-input-button")
     addImageLabel.textContent = "+ Ajouter photo"
     addImageDiv.appendChild(addImageLabel)
-    let addImageInput = document.createElement("input");
+    const addImageInput = document.createElement("input");
     addImageInput.setAttribute("type", "file");
     addImageInput.setAttribute("id", "fileList");
     addImageInput.classList.add("displayNone")
     addImageLabel.appendChild(addImageInput);
-    let textAddImageDiv = document.createElement("p"); 
+    const textAddImageDiv = document.createElement("p"); 
     textAddImageDiv.textContent = "jpg, png : 4mo max"
     addImageDiv.appendChild(textAddImageDiv); 
     // Place l'ensemble de la div pour ajouter un titre
-    let labelAddTitle = document.createElement("label"); 
+    const labelAddTitle = document.createElement("label"); 
     labelAddTitle.setAttribute("for", "title");
     labelAddTitle.classList.add("formLabel")
     labelAddTitle.textContent = "Titre";
     addWorkForm.appendChild(labelAddTitle)
-    let inputAddTitle = document.createElement("input")
+    const inputAddTitle = document.createElement("input")
     inputAddTitle.setAttribute("type", "text")
     inputAddTitle.setAttribute("id", "title")
     inputAddTitle.setAttribute("name", "title")
     addWorkForm.appendChild(inputAddTitle)
     // Place l'ensemble de la div pour séléctionner la catégorie
-    let selectCategoryLabel = document.createElement("label");
+    const selectCategoryLabel = document.createElement("label");
     selectCategoryLabel.classList.add("formLabel"); 
     addWorkForm.appendChild(selectCategoryLabel); 
     selectCategoryLabel.textContent = "Catégorie";
     selectCategoryLabel.setAttribute("name", "category");
-    let selectCategoryInput = document.createElement("select");
+    const selectCategoryInput = document.createElement("select");
     addWorkForm.appendChild(selectCategoryInput);
     selectCategoryInput.setAttribute("name", "category");
     selectCategoryInput.setAttribute("id", "category");
-    let categories = await getCategories(); 
-    let optionCategory = document.createElement("option");
+    const categories = await getCategories(); 
+    const optionCategory = document.createElement("option");
     optionCategory.setAttribute("value", "")
     optionCategory.setAttribute("selected", "selected")
     selectCategoryInput.appendChild(optionCategory)
     for (let category of categories) {
-        let optionCategoryArray = document.createElement("option")
+        const optionCategoryArray = document.createElement("option")
         optionCategoryArray.setAttribute("value", category.id);
         optionCategoryArray.textContent = category.name;
         selectCategoryInput.appendChild(optionCategoryArray)
@@ -177,8 +177,8 @@ export async function openModal () {
     // Récupération de la photo une fois intégrée au formulaire
     function selectFile() {
         let myFile = addImageInput.files[0]; 
-        let reader = new FileReader();
-        let imgElement = document.createElement("img")
+        const reader = new FileReader();
+        const imgElement = document.createElement("img")
         
         reader.addEventListener(
             "load",
@@ -210,7 +210,7 @@ export async function openModal () {
     let isTitleValid = false; // titre
     function isFormValid() {
       if (isImgAndSelectValid && isTitleValid) {
-        console.log("FORM IS VALID");
+        console.log("Le formulaire est rempli");
         inputSubmitBtn.classList.add("active")
         inputSubmitBtn.disabled = false;
         return true;
@@ -245,9 +245,9 @@ export async function openModal () {
     // Requête création d'un nouveau travail
     addWorkForm.addEventListener("submit", async (event) => {
         event.preventDefault(); 
-        let title = inputAddTitle.value;
-        let addCategory = document.getElementById("category").value
-        let myFile = addImageInput.files[0]
+        const title = inputAddTitle.value;
+        const addCategory = document.getElementById("category").value
+        const myFile = addImageInput.files[0]
         const token = window.localStorage.getItem("token")
         const data = new FormData();
         data.append("title", title);
@@ -313,7 +313,7 @@ export async function openModal () {
             // Récupération des travaux depuis l'API
             const sectionGallery = document.querySelector(".gallery");
             sectionGallery.innerHTML = "";
-        let displayWorks = await getWorks();
+        const displayWorks = await getWorks();
         for (const displayWork of displayWorks) {
         // Récupération de l'élément du DOM qui accueillera les travaux 
         // Création d'une balise qui accueillera les éléments des travaux 

@@ -1,7 +1,5 @@
 
 const link = "http://localhost:5678/api/users/login"
-// email: sophie.bluel@test.tld
-// password: S0phie
 
 let baliseEmail = document.getElementById("email"); 
 let balisePassword = document.getElementById("password");

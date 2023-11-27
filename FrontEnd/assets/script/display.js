@@ -4,7 +4,7 @@ import { openModal } from "./modals.js";
 // Création du premier bouton filtre
 const premierBtn = document.createElement("button");
 // Création de l'élément du DOM qui accueillera les balises button
-let filterDiv = document.createElement("div");
+const filterDiv = document.createElement("div");
 // Récupération de l'élément du DOM qui accueillera la div filtre
 const sectionPortfolio = document.getElementById("portfolio");
 const sectionGallery = document.querySelector(".gallery");
@@ -24,7 +24,7 @@ export async function getDisplayOfCategories() {
     const categories = await getCategories();
     for (const category of categories) {
         // Création des boutons 
-        let filtreBtn = document.createElement("button");
+        const filtreBtn = document.createElement("button");
         filtreBtn.innerText = category.name;
         filtreBtn.dataset.id = category.id
         filtreBtn.classList.add("filterBtn");
@@ -36,7 +36,7 @@ export async function getDisplayOfCategories() {
 // Affichage des travaux
 export async function getDisplayOfWorks() {  
     // Récupération des travaux depuis l'API
-    let displayWorks = await getWorks();
+    const displayWorks = await getWorks();
     for (const displayWork of displayWorks) {
         // Récupération de l'élément du DOM qui accueillera les travaux 
         const sectionGallery = document.querySelector(".gallery");
@@ -58,23 +58,23 @@ export async function getDisplayOfWorks() {
 // Page lorsque l'utilisateur est connecté
 export function displayIfConnectedUser() {
     // Deconnexion de l'utilisateur 
-    let btnDeco = document.getElementById("decoBtn");
+    const btnDeco = document.getElementById("decoBtn");
     btnDeco.textContent = "logout"
     btnDeco.addEventListener("click", () => {
         let deconnexion = window.localStorage.removeItem("token")
     })
     // Bande noire sur le haut de page
-    let blackDiv = document.createElement("div")
+    const blackDiv = document.createElement("div")
     blackDiv.classList.add("blackDiv")
-    let body = document.querySelector("body")
-    let header = document.querySelector("header")
+    const body = document.querySelector("body")
+    const header = document.querySelector("header")
     body.appendChild(blackDiv)
     body.insertBefore(blackDiv, header)
     // Texte dans la bande noire 
-    let iconMode = document.createElement("i")
+    const iconMode = document.createElement("i")
     iconMode.setAttribute("class", "fa-regular fa-pen-to-square")
     blackDiv.appendChild(iconMode)
-    let textMode = document.createElement("p")
+    const textMode = document.createElement("p")
     textMode.textContent ="Mode édition"
     blackDiv.appendChild(textMode)
     // Disparition du bouton "Tous"
@@ -87,7 +87,7 @@ export function displayIfConnectedUser() {
     portfolioTitle.appendChild(updateBtn);
     //sectionPortfolio.insertBefore(updateBtn, filterDiv)
     // Ajout de l'icone
-    let iconUpdate = document.createElement("i")
+    const iconUpdate = document.createElement("i")
     iconUpdate.setAttribute("class", "fa-regular fa-pen-to-square")
     updateBtn.appendChild(iconUpdate)
 
@@ -99,12 +99,13 @@ export function displayIfConnectedUser() {
 }
 //Boutons filtre
 window.onload = () => {
-    let filterBtns = document.querySelectorAll(".filterBtn")
+    const filterBtns = document.querySelectorAll(".filterBtn")
     const travaux = document.querySelector(".gallery")
-    let figures = travaux.querySelectorAll("figure")
+    const figures = travaux.querySelectorAll("figure")
     for (let element of filterBtns) {
         element.addEventListener("click", () => {
-            for (let figure of figures){
+            document.querySelector(".filterBtn_selected").classList.remove("filterBtn_selected")
+            for (const figure of figures){
                 if (element.dataset.id == 0) {
                     figure.classList.remove("displayNone")
                 } else {
@@ -112,6 +113,7 @@ window.onload = () => {
                     figure.classList.toggle("displayNone", isDifferentDataSetId)
                 }
             }
+            element.classList.add("filterBtn_selected")
         })
     }
 }

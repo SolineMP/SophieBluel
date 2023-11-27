@@ -19,8 +19,8 @@ Installation de node.js, npm et liveServer.
 ## Installation
  - Cloner le code
  - Changer de branche vers la branche devFrontEnd
- - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
- - Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
+ - Ouvre une première instance avec seulement le backend, lancez la commande "**npm start**". 
+ - Ouvre une seconde instance avec seulement le frontend, lancez avec liveServer.
  - Lancez votre projet en local avec liveServer.
  - Naviguer 
 

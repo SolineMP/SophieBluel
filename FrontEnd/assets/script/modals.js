@@ -217,6 +217,7 @@ export async function openModal () {
       } else {
         console.log("Le formulaire n'est pas totalement rempli");
         inputSubmitBtn.disabled = true;
+        inputSubmitBtn.classList.remove("active")
         return false;
       }
     }

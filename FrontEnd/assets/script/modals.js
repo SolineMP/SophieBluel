@@ -216,6 +216,7 @@ export async function openModal () {
         return true;
       } else {
         console.log("Le formulaire n'est pas totalement rempli");
+        inputSubmitBtn.disabled = true;
         return false;
       }
     }
